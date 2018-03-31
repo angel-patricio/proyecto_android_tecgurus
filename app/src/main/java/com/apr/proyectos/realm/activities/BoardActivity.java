@@ -17,6 +17,8 @@ import com.apr.proyectos.realm.R;
 import com.apr.proyectos.realm.adapters.BoardAdapter;
 import com.apr.proyectos.realm.models.Board;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import io.realm.Realm;
@@ -39,6 +41,24 @@ public class BoardActivity extends AppCompatActivity implements RealmChangeListe
         setContentView(R.layout.activity_board);
 
         // Conexión a la bd de realm
+
+        String json = "{id: 1, name: 'London'}";
+
+        try {
+            JSONObject mJson = new JSONObject(json);
+
+            int id = mJson.getInt("id");
+            String name = mJson.getString("name");
+
+            Toast.makeText(this, "Id: " + id + ", Ciudad: " + name, Toast.LENGTH_LONG).show();
+
+        } catch (JSONException e)   {
+            e.printStackTrace();
+        }
+
+
+
+        /*
         realm = Realm.getDefaultInstance();
         boards = realm.where(Board.class).findAll();
         boards.addChangeListener(this);
@@ -54,7 +74,7 @@ public class BoardActivity extends AppCompatActivity implements RealmChangeListe
                 showAddBoard("Agregar nuevo tablero", "Ingresa el nombre del tablero");
             }
         });
-
+        */
     }
 
     /**
